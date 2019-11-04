@@ -26,6 +26,7 @@
                     <th>Disease</th>
                     <th>Body</th>
 	                  <th>Weight</th>
+                    <th>Previous Test Report</th>
                     <th>Delete</th>
 	                  
 	              </tr>
@@ -56,6 +57,7 @@
                   $body = $row['body'];
                   $weight = $row['weight'];
                   $date = $row['date'];
+                  $file = $row['file'];
 
                         
                         
@@ -84,6 +86,8 @@
                   echo "<td>$disease</td>";
                   echo "<td>$body</td>";
                   echo "<td>$weight</td>";
+
+                  echo "<td><a href='$file'>$file</a></td>";
                         
                   echo "<td><a onClick=\"javascript: return confirm('Are u sure u want to delete'); \" href='allpatienthistory.php?delete={$assistive_id}' >Delete</a></td>";
                   echo "</tr>";

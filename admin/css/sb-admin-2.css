@@ -10570,18 +10570,22 @@ a:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+   width: 100%;
 }
 
 #wrapper #content-wrapper {
   background-color: #f8f9fc;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #wrapper #content-wrapper #content {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
+  background-color: #f8f9fc;
+  width: 100%;
+  overflow: hidden;
 }
 
 .container,

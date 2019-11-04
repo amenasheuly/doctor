@@ -28,6 +28,7 @@
                   $disease = $_POST['disease'];
                   $body = $_POST['body'];
                   $weight = $_POST['weight'];
+                   $file = $row['file'];
                   $date = $_POST['date'];
                   $p_test = $_POST['p_test'];
                   $t_report = $_POST['t_report'];
@@ -87,6 +88,7 @@
                   $body = $row['body'];
                   $weight = $row['weight'];
                   $date = $row['date'];
+                  $file = $row['file'];
 
 
 
@@ -218,72 +220,97 @@
 
                     </div>
                 </div>
-                 
-                <div class="form-group">
-                        <label for="test" class="col-sm-3 control-label">Prescribe Test </label>
+                 <div class="form-group">
+                        <label for="file" class="col-sm-3 control-label">Previous Test Report* </label>
                     <div class="col-sm-6">
-                        <input type="text" name="p_test" class="form-control">
+                        <input name="file" value="<?php echo $file; ?> "  class="form-control" readonly>
+
                     </div>
                 </div>
+
+             
+
+
+                <div class="form-group col-sm-6"  >
+                <label class="control-label col-sm-3">Prescribe Test</label>
+                
+                <select  class="form-control" id="exampleSelect1" name="t_name">                             
+                <?php
+                $query ="SELECT * FROM test";
+                $select_posts = mysqli_query($connection,$query);
+                
+                while ($row_ah = mysqli_fetch_assoc($select_posts)) {
+                ?>
+                <option value="<?php echo $row_ah['p_test'];?>" selected class="test"><?php echo $row_ah['p_test']; ?>
+                  
+                </option>
+                <?php } ?>
+                </select>               
+                </div>
+               
                 <div class="form-group">
-                        <label for="t_report" class="col-sm-3 control-label">Diagnosis/Test Report </label>
+                        <label for="t_report" class="col-sm-3 control-label">Diagnosis</label>
                     <div class="col-sm-6">
                         <input type="text" name="t_report" id="weight" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
-                        <label for="prescribe" class="col-sm-3 control-label">Prescribed Medicine </label>
-                    <div class="col-sm-6">
-                        <input type="text" name="prescribe" id="weight" class="form-control">
+                <div class="form-group col-sm-6">
+                    <label for="prescribe">Prescribed Medicine </label>
+                   
+                    <div class="row">
+                    <div class="col-sm-2">
+                    <label for="prescribe">Medicine</label>
+                    <select  class="form-control" id="exampleSelect1" name="prescribe">                             
+                    <?php
+                    $query ="SELECT * FROM medicine";
+                    $select_posts = mysqli_query($connection,$query);
+                
+                    while ($row_ah = mysqli_fetch_assoc($select_posts)) {
+                    ?>
+                    <option value="<?php echo $row_ah['prescribe'];?>" selected class ="test"><?php echo $row_ah['prescribe']; ?>
+                    </option>
+                   <?php } ?>
+                </select> 
+                    
+                        
                     </div>
+                    <div class="col-sm-2">
+                    <label for="mg" class="control-label">mg</label>
+                    <input type="name" name="mg" class="form-control"> 
+                    </div>
+                    <div class="col-sm-2" >
+                  <label class="control-label">Count</label>
+                  <input type="text" name="daily" class="form-control" placeholder="0/0/1"> 
                 </div>
-                <div class="form-group">
-                        <label for="advice" class="col-sm-3 control-label">Advice </label>
-                    <div class="col-sm-6">
+                      
+                    </div>
+                        
+                   
+                </div>              
+                
+                
+                
+                  <div class="form-group col-sm-6">
+                        <label for="advice" class="control-label">Advice </label>
+                    
                         <input type="text" name="advice" id="weight" class="form-control">
-                    </div>
+                   
                 </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3">Daily Count</label>
-                  <div class="form-group">
-                    <select name="daily" style="    margin-left: 15px;border: 1px solid #ccc;border-radius: 4px;padding: 6px 12px;">
-                      <option>
-                        1
-                      </option>
-                      <option>
-                        2
-                      </option>
-                      <option>
-                        3
-                      </option>
-                      <option>
-                        4
-                      </option>
-                      <option>
-                        5
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                        <label for="refer" class="col-sm-3 control-label">Reference Doctor</label>
-                    <div class="col-sm-6">
+                <div class="form-group col-sm-6">
+                        <label for="refer" class="control-label">Reference Doctor</label>
+                  
                         <input type="text" name="refer" id="weight" class="form-control">
-                    </div>
+                   
                 </div>
-
-               
                 <div class="col-sm-6">
-                    <div class="form-group">
-
-                  <input type="submit"  name="prescription_form" class="btn btn-primary form-control btn-block" value="Submit">
-                                     
-                    </div> 
+                <div class="form-group">
+                <input type="submit"  name="prescription_form" class="btn btn-primary form-control btn-block" value="Submit">
+                </div> 
                 </div> 
 
             </form> <!-- /form -->
 
-              <br>
+    <br>
     <br><br>
         </div> 
         </div>

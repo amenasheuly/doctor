@@ -16,7 +16,7 @@
       </a>
 
       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+     
 
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -89,6 +89,25 @@
 
 
       <hr class="sidebar-divider d-none d-md-block">
+           <li class="nav-item">
+          <div class="search" style="margin-left: 15px;">
+          <i style="color:white;" class="fas fa-search"></i>
+      
+          <span style="color: white;">Search By Test Name</span>
+                <form action="searchtest.php" method="post">
+                    <div class="input-group">
+                        <input name="search" type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button name="submit" class="btn btn-default" type="submit" style = "margin-top: 8px;">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+            </form>
+            </div>
+
+
+      </li>
 
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -155,3 +174,5 @@
 
         </nav>
         <!-- End of Topbar -->
+
+      

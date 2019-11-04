@@ -30,7 +30,7 @@
        
        $search = $_POST['search'];
     
-    $query = " SELECT * FROM patientregistration WHERE patient_id LIKE '%$search%' ";
+    $query = " SELECT * FROM patientregistration WHERE patient_id LIKE '%$search%'";
     $search_query = mysqli_query($connection,$query);
 
     if (!$search_query) {

@@ -1,25 +1,30 @@
+ <?Php include "include/database.php"; ?>
 <?php ob_start(); ?>
-<?Php include "include/database.php"; ?>
-<?Php include "include/header.php"; ?>
-<?Php include "include/nav1.php"; ?>
-<?Php include "include/nav.php"; ?>
+     <?Php include "include/header.php"; ?>
+     <?Php include "include/nav.php"; ?>
 
 
-  <h1 class="h3 mb-0 text-gray-800" style="margin-left: 7px;margin-top: 25px;">All My Previous Records</h1>
-  <table id="example" class="table table-bordered" style="width:100%" id='printTable'>
+        <h1 class="h3 mb-0 text-gray-800 " style="margin-left: 7px;margin-top: 25px;">All Patient History</h1>
+        <br>
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr> 
-                    <th>Date</th>                   
+                   
+
+
+                     <th>Date</th> 
+                    <th>Prescription ID</th>
                     <th>Patient ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Age</th>
                     <th>Phone Number</th>                   
                     <th>Gender</th>
-                    <th>Address</th>              
+                    <th>Address</th>                 
+                                   
                     <th>Blood</th>
-                    <th>Systolic</th>
-                    <th>Diastolic</th>
+                      <th>Systolic</th>
+                      <th>Diastolic</th>
                     <th>Problem </th>
                     <th>Disease</th>
                     <th>Body</th>
@@ -29,38 +34,33 @@
                     <th>Prescribe medicine</th>
                     <th>Advice</th>
                     <th>count daily</th>
-                    <th>Reference Doctor</th>
-                    <th>View</th>  
-    </tr>
+                    <th>Reference Doctor</th> 
+                    
+                </tr>
             </thead>
             <tbody>
-<?php   
-  
-if (isset($_SESSION['email'])) {
-                          
-    $the_post = $_SESSION['email'];
 
 
-}
-$query = "SELECT * FROM prescription_new where email ='{$the_post}'";
-// if(isset($_GET['email']))
-// {
+                 <?php
 
-// }
-//            $query =   "SELECT * FROM prescription_new WHERE email=";
-$result = mysqli_query($connection, $query);
+    if (isset($_POST['search'])) {
+       
+       $search = $_POST['search'];
+    
+    $query = " SELECT * FROM prescription_new WHERE p_test LIKE '%$search%' ";
+    $search_query = mysqli_query($connection,$query);
 
-?>
+    if (!$search_query) {
+        die("QUERY FAILED". mysqli_error($connection));
+    }
+    $count = mysqli_num_rows($search_query);
+     if ($count == 0 ) {
+         echo "<h1> NO RESULT </h1>";
+     }else {
 
-             
-<?php  
-if(mysqli_num_rows($result) > 0)  
-{  
-while($row = mysqli_fetch_array($result))  
-// {
-// while($row=mysqli_fetch_assoc($select_posts)) {
-                       {
-                        $id = $row['pres_id'];
+                      while($row=mysqli_fetch_assoc($search_query)) {
+
+                        $pres_id = $row['pres_id'];
                         $patient_id = $row['patient_id'];
                          $first_name = $row['first_name'];
                   $last_name = $row['last_name'];
@@ -90,7 +90,7 @@ while($row = mysqli_fetch_array($result))
 
                         echo "<tr>";
                        echo "<td>$date</td>";
-                 
+                 echo "<td>$pres_id</td>";
                   echo "<td>$patient_id</td>";
                   echo "<td>$first_name  $last_name </td>";
                   echo "<td>$email</td>";
@@ -117,58 +117,40 @@ while($row = mysqli_fetch_array($result))
                       echo "<td>$advice</td>";
                        echo "<td>$daily</td>";
                         echo "<td>$refer</td>";
-                        echo "<td><a href='view.php?source=edit_post&pres_id={$id}'>View Data</a></td>";
-                         
-
-                        
-                 
-                        
                         
                         echo "</tr>";
 
-                        }
 
-                                
-  }else{
-      echo "<h4 style='text-align:center; color: Blue;'>You Have NO Previous Record.</h4>";
-       }
-  ?>
-               
+                        ?>
+
+                         
+
+                <?php } 
 
 
 
 
-              
-            </tbody>
+     }
+  }   
+
+
+?> 
+                  
+   </tbody>
         </table>
 
- </div>
-
-
-
-
               <br><br><br>
-       
+        </div> 
+        </div>
 
-          
+            </div>
+          </div>
 
-       
-                                
+        </div>
 
-             <script type="text/javascript">
-       function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
-
-     window.print();
-
-     document.body.innerHTML = originalContents;
-}
-</script>
+<?Php include "include/modal.php"; ?>
 
 
 
-     
-<?Php include "include/footer.php"; ?>
+     <?Php include "include/footer.php"; ?>

@@ -40,13 +40,21 @@
                   $body = $_POST['body'];
                   $weight = $_POST['weight'];
                   $date = $_POST['date'];
+                 
+                 
+
+$file_dir = "t_report/";
+$file = $file_dir. basename($_FILES["file"]["name"]);
+$uploadOk = 1;    
+$fileType = strtolower(pathinfo($file,PATHINFO_EXTENSION));
+$filemov = move_uploaded_file($_FILES["file"]["tmp_name"], $file);
                          
                           
                           
                       
-  $query = "INSERT INTO  assistive_data(patient_id,first_name,last_name,email,phone,gender,age,address,blood,systolic,diastolic,problem,disease,body,weight,date)";
+  $query = "INSERT INTO  assistive_data(patient_id,first_name,last_name,email,phone,gender,age,address,blood,systolic,diastolic,problem,disease,body,weight,date,file)";
 
-  $query .= "VALUES ('{$patient_id}','{$first_name}','{$last_name}','{$email}','{$phone}','{$gender}','{$age}','{$address}','{$blood}','{$systolic}','{$diastolic}','{$problem}','{$disease}','{$body}','{$weight}','{$date}')"; 
+  $query .= "VALUES ('{$patient_id}','{$first_name}','{$last_name}','{$email}','{$phone}','{$gender}','{$age}','{$address}','{$blood}','{$systolic}','{$diastolic}','{$problem}','{$disease}','{$body}','{$weight}','{$date}','{$file}')"; 
 
     $create_post_query = mysqli_query($connection,$query);
                              
@@ -82,7 +90,7 @@
                   
  <div class="row"> 
   <div class="container">
-            <form class="form-horizontal" role="form" action="" method="post"> 
+            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data"> 
                 <div class='form-group'>
                     <label for='patient_id' class='col-sm-3 control-label'>Patient ID</label>
                     <div class='col-sm-6'>
@@ -201,15 +209,23 @@
 
                     </div>
                 </div>
+                <div class="form-group">
+                        <label for="file" class="col-sm-3 control-label">Test Report* </label>
+                    <div class="col-sm-6">
+                       <input type="file" name="file" id="file"> 
+
+                    </div>
+                </div>
+                 
                 <!-- /.form-group -->
               <!--   <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <span class="help-block">*Required fields</span>
                     </div>
                 </div> -->
-                <div class="col-sm-6">
-                    <div class="form-group">
-
+               
+                <div class="form-group">
+ <div class="col-sm-6">
                   <input type="submit" name="prescription_form" class="btn btn-primary form-control btn-block" value="Submit">
                                      
                     </div> 
